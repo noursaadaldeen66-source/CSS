@@ -1,0 +1,24 @@
+#A{
+    display: block;
+    background-color: aqua;
+    width: 100px;
+    height: 100px;
+}
+#B{
+    display: inline-block;
+    background-color: rgb(120, 210, 84);
+     width: 100px;
+    height: 100px;
+}
+#C{
+    display: inline;
+    background-color: rgb(171, 37, 208);
+    width: 400px;
+    height: 400px;
+}
+#Contaner{
+    display: block;
+    background-color: rgb(190, 190, 190);
+    width: 800px;
+    height: 800px;
+}
