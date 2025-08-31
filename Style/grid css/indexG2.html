@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل شامل لخصائص CSS Grid</title>
+    <style>
+        :root {
+            --primary-color: #4e54c8;
+            --secondary-color: #8f94fb;
+            --accent-color: #ff6b6b;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --spacing: 1rem;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+            direction: rtl;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            margin: 25px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        h3 {
+            color: var(--dark-color);
+            margin: 20px 0 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .property-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 20px;
+            transition: var(--transition);
+        }
+
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .property-name {
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .property-description {
+            margin-bottom: 15px;
+            min-height: 80px;
+        }
+
+        .property-example {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+            overflow-x: auto;
+            margin: 10px 0;
+            direction: ltr;
+            text-align: left;
+        }
+
+        .example-container {
+            background: var(--light-color);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin: 15px 0;
+            min-height: 200px;
+        }
+
+        .example-grid {
+            display: grid;
+            gap: 10px;
+            padding: 10px;
+            background: var(--secondary-color);
+            border-radius: var(--border-radius);
+        }
+
+        .example-item {
+            background: var(--accent-color);
+            color: white;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .special-item {
+            background: var(--primary-color);
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .control-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: var(--dark-color);
+        }
+
+        select, input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+        }
+
+        .note {
+            background: #fff9e6;
+            padding: 15px;
+            border-right: 4px solid #ffcc00;
+            border-radius: var(--border-radius);
+            margin: 20px 0;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            background: var(--dark-color);
+            color: white;
+            border-radius: var(--border-radius);
+        }
+
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>دليل شامل لخصائص CSS Grid</h1>
+            <p>تعرف على جميع خصائص CSS Grid وكيفية استخدامها مع أمثلة تفاعلية</p>
+        </header>
+
+        <section>
+            <h2>خصائص حاوية الشبكة (Grid Container)</h2>
+            <p>هذه الخصائص تُطبق على العنصر الرئيسي الذي يصبح حاوية للشبكة.</p>
+            
+            <div class="grid-container">
+                <div class="property-card">
+                    <div class="property-name">display: grid</div>
+                    <div class="property-description">
+                        يحول العنصر إلى حاوية grid ويجعل جميع العناصر الفرعية عناصر grid.
+                    </div>
+                    <div class="property-example">
+                        .container {<br>
+                        &nbsp;&nbsp;display: grid;<br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="property-card">
+                    <div class="property-name">grid-template-columns</div>
+                    <div class="property-description">
+                        يحدد عدد الأعمدة وأحجامها في الشبكة.
+                    </div>
+                    <div class="property-example">
+                        .container {<br>
+                        &nbsp;&nbsp;grid-template-columns: 100px 1fr 2fr;<br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="property-card">
+                    <div class="property-name">grid-template-rows</div>
+                    <div class="property-description">
+                        يحدد عدد الصفوف وأحجامها في الشبكة.
+                    </div>
+                    <div class="property-example">
+                        .container {<br>
+                        &nbsp;&nbsp;grid-template-rows: 50px 100px auto;<br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="property-card">
+                    <div class="property-name">grid-template-areas</div>
+                    <div class="property-description">
+                        يحدد تخطيط الشبكة باستخدام أسماء المناطق.
+                    </div>
+                    <div class="property-example">
+                        .container {<br>
+                        &nbsp;&nbsp;grid-template-areas: <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;"header header header"<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;"sidebar content content"<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;"footer footer footer";<br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="property-card">
+                    <div class="property-name">gap (row-gap, column-gap)</div>
+                    <div class="property-description">
+                        يحدد المسافة بين خلايا الشبكة (الصفوف والأعمدة).
+                    </div>
+                    <div class="property-example">
+                        .container {<br>
+                        &nbsp;&nbsp;gap: 20px;<br>
+                        &nbsp;&nbsp;/* أو */<br>
+                        &nbsp;&nbsp;row-gap: 10px;<br>
+                        &nbsp;&nbsp;column-gap: 20px;<br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="property-card">
+                    <div class="property-name">justify-items</div>
+                    <div class="property-description">
+                        يحدد المحاذاة الأفقية لكل العناصر داخل الشبكة.
+                    </div>
+                    <div class="property-example">
+                        .container {<br>
+                        &nbsp;&nbsp;justify-items: start | end | center | stretch;<br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="property-card">
+                    <div class="property-name">align-items</div>
+                    <div class="property-description">
+                        يحدد المحاذاة الرأسية لكل العناصر داخل الشبكة.
+                    </div>
+                    <div class="property-example">
+                        .container {<br>
+                        &nbsp;&nbsp;align-items: start | end | center | stretch;<br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="property-card">
+                    <div class="property-name">place-items</div>
+                    <div class="property-description">
+                        اختصار لخصائص align-items و justify-items.
+                    </div>
+                    <div class="property-example">
+                        .container {<br>
+                        &nbsp;&nbsp;place-items: center stretch;<br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="property-card">
+                    <div class="property-name">justify-content</div>
+                    <div class="property-description">
+                        يحدد المحاذاة الأفقية للشبكة بأكملها داخل الحاوية.
+                    </div>
+                    <div class="property-example">
+                        .container {<br>
+                        &nbsp;&nbsp;justify-content: start | end | center | stretch | space-around | space-between | space-evenly;<br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="property-card">
+                    <div class="property-name">align-content</div>
+                    <div class="property-description">
+                        يحدد المحاذاة الرأسية للشبكة بأكملها داخل الحاوية.
+                    </div>
+                    <div class="property-example">
+                        .container {<br>
+                        &nbsp;&nbsp;align-content: start | end | center | stretch | space-around | space-between | space-evenly;<br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="property-card">
+                    <div class="property-name">place-content</div>
+                    <div class="property-description">
+                        اختصار لخصائص align-content و justify-content.
+                    </div>
+                    <div class="property-example">
+                        .container {<br>
+                        &nbsp;&nbsp;place-content: center space-between;<br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="property-card">
+                    <div class="property-name">grid-auto-columns</div>
+                    <div class="property-description">
+                        يحدد حجم الأعمدة التي تم إنشاؤها تلقائيًا.
+                    </div>
+                    <div class="property-example">
+                        .container {<br>
+                        &nbsp;&nbsp;grid-auto-columns: minmax(100px, auto);<br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="property-card">
+                    <div class="property-name">grid-auto-rows</div>
+                    <div class="property-description">
+                        يحدد حجم الصفوف التي تم إنشاؤها تلقائيًا.
+                    </div>
+                    <div class="property-example">
+                        .container {<br>
+                        &nbsp;&nbsp;grid-auto-rows: 100px;<br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="property-card">
+                    <div class="property-name">grid-auto-flow</div>
+                    <div class="property-description">
+                        يتحكم في كيفية وضع العناصر تلقائيًا في الشبكة.
+                    </div>
+                    <div class="property-example">
+                        .container {<br>
+                        &nbsp;&nbsp;grid-auto-flow: row | column | row dense | column dense;<br>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>خصائص عناصر الشبكة (Grid Items)</h2>
+            <p>هذه الخصائص تُطبق على العناصر الفرعية داخل حاوية الشبكة.</p>
+            
+            <div class="grid-container">
+                <div class="property-card">
+                    <div class="property-name">grid-column-start / grid-column-end</div>
+                    <div class="property-description">
+                        يحدد موقع بداية ونهاية العنصر بالنسبة لخطوط الأعمدة.
+                    </div>
+                    <div class="property-example">
+                        .item {<br>
+                        &nbsp;&nbsp;grid-column-start: 1;<br>
+                        &nbsp;&nbsp;grid-column-end: 3;<br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="property-card">
+                    <div class="property-name">grid-row-start / grid-row-end</div>
+                    <div class="property-description">
+                        يحدد موقع بداية ونهاية العنصر بالنسبة لخطوط الصفوف.
+                    </div>
+                    <div class="property-example">
+                        .item {<br>
+                        &nbsp;&nbsp;grid-row-start: 2;<br>
+                        &nbsp;&nbsp;grid-row-end: 4;<br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="property-card">
+                    <div class="property-name">grid-column</div>
+                    <div class="property-description">
+                        اختصار لخصائص grid-column-start و grid-column-end.
+                    </div>
+                    <div class="property-example">
+                        .item {<br>
+                        &nbsp;&nbsp;grid-column: 1 / 3;<br>
+                        &nbsp;&nbsp;/* أو */<br>
+                        &nbsp;&nbsp;grid-column: 1 / span 2;<br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="property-card">
+                    <div class="property-name">grid-row</div>
+                    <div class="property-description">
+                        اختصار لخصائص grid-row-start و grid-row-end.
+                    </div>
+                    <div class="property-example">
+                        .item {<br>
+                        &nbsp;&nbsp;grid-row: 2 / 4;<br>
+                        &nbsp;&nbsp;/* أو */<br>
+                        &nbsp;&nbsp;grid-row: 2 / span 2;<br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="property-card">
+                    <div class="property-name">grid-area</div>
+                    <div class="property-description">
+                        يعطي اسمًا للعنصر للإشارة إليه في grid-template-areas، أو كاختصار لخصائص تحديد الموقع.
+                    </div>
+                    <div class="property-example">
+                        .item {<br>
+                        &nbsp;&nbsp;grid-area: header;<br>
+                        &nbsp;&nbsp;/* أو */<br>
+                        &nbsp;&nbsp;grid-area: 1 / 1 / 3 / 3;<br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="property-card">
+                    <div class="property-name">justify-self</div>
+                    <div class="property-description">
+                        يحدد المحاذاة الأفقية لعنصر داخل خليته.
+                    </div>
+                    <div class="property-example">
+                        .item {<br>
+                        &nbsp;&nbsp;justify-self: start | end | center | stretch;<br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="property-card">
+                    <div class="property-name">align-self</div>
+                    <div class="property-description">
+                        يحدد المحاذاة الرأسية لعنصر داخل خليته.
+                    </div>
+                    <div class="property-example">
+                        .item {<br>
+                        &nbsp;&nbsp;align-self: start | end | center | stretch;<br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="property-card">
+                    <div class="property-name">place-self</div>
+                    <div class="property-description">
+                        اختصار لخصائص align-self و justify-self.
+                    </div>
+                    <div class="property-example">
+                        .item {<br>
+                        &nbsp;&nbsp;place-self: center stretch;<br>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>وحدات القياس الخاصة بـ Grid</h2>
+            <div class="grid-container">
+                <div class="property-card">
+                    <div class="property-name">وحدة fr</div>
+                    <div class="property-description">
+                        تمثل جزءًا من المساحة المتاحة في حاوية الشبكة.
+                    </div>
+                    <div class="property-example">
+                        grid-template-columns: 1fr 2fr 1fr;
+                    </div>
+                </div>
+                
+                <div class="property-card">
+                    <div class="property-name">minmax()</div>
+                    <div class="property-description">
+                        يحدد نطاقًا للحجم بين minimum و maximum.
+                    </div>
+                    <div class="property-example">
+                        grid-template-columns: minmax(100px, 1fr) 2fr;
+                    </div>
+                </div>
+                
+                <div class="property-card">
+                    <div class="property-name">repeat()</div>
+                    <div class="property-description">
+                        يكرر نمطًا من الأحجام لعدد محدد من المرات.
+                    </div>
+                    <div class="property-example">
+                        grid-template-columns: repeat(3, 1fr);
+                    </div>
+                </div>
+                
+                <div class="property-card">
+                    <div class="property-name">auto-fit و auto-fill</div>
+                    <div class="property-description">
+                        تستخدم مع repeat() لإنشاء عدد متغير من المسارات حسب الحاجة.
+                    </div>
+                    <div class="property-example">
+                        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="note">
+            <h3>ملاحظة هامة</h3>
+            <p>CSS Grid هو نظام تخطيط ثنائي الأبعاد تم تقديمه في CSS3، وهو مدعوم بشكل كامل في جميع المتصفحات الحديثة. يمكنك الجمع بين Grid و Flexbox لإنشاء تخطيطات معقدة ومتجاوبة.</p>
+        </section>
+
+        <footer>
+            <p>تم إنشاء هذا الدليل لمساعدة المطورين على فهم خصائص CSS Grid</p>
+            <p>CSS Grid &copy; 2023</p>
+        </footer>
+    </div>
+
+    <script>
+        // يمكن إضافة JavaScript لجعل الأمثلة تفاعلية
+        document.addEventListener('DOMContentLoaded', function() {
+            // إضافة تأثيرات تفاعلية للبطاقات
+            const cards = document.querySelectorAll('.property-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                    this.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.15)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

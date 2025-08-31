@@ -7,13 +7,76 @@
     <title>Document</title>
 </head>
 <body>
+     <!-- <nav class="nav">
+      <ul class="nav-list">
+        <li><a href="">static</a></li>
+        <li><a href="">relative</a></li>
+        <li><a href="">fixed</a></li>
+        <li><a href="">absolute</a></li>
+        <li><a href="">sticky</a></li>
+      </ul>
+    </nav>
     <div id="Contaner" >
 
-        <div id="A">3</div>
-        <div id="B">2</div>
-        <div id="C">1</div>
+        <div id="A">static</div>
+        <div id="B">relative</div>
+        <div id="C">fixed</div> 
+        <div id="D">absolute</div> 
+        <div id="E">sticky</div> 
+    </div> -->
+ <div class="container">
+        <h1>شرح CSS Grid و :root</h1>
+        
+        <div class="grid-container">
+            <div class="grid-item header">
+                <h2>رأس الصفحة (Header)</h2>
+                <p>هذا العنصر يمتد عبر جميع الأعمدة باستخدام <span class="var-example">grid-column: 1 / -1</span></p>
+            </div>
+            
+            <div class="grid-item sidebar">
+                <h3>الشريط الجانبي (Sidebar)</h3>
+                <p>هذا العنصر يمتد عبر صفين باستخدام <span class="var-example">grid-row: span 2</span></p>
+            </div>
+            
+            <div class="grid-item">
+                <h3>محتوى 1</h3>
+                <p>عنصر عادي في الشبكة</p>
+            </div>
+            
+            <div class="grid-item">
+                <h3>محتوى 2</h3>
+                <p>عنصر عادي في الشبكة</p>
+            </div>
+            
+            <div class="grid-item main-content">
+                <h3>المحتوى الرئيسي (Main Content)</h3>
+                <p>هذا العنصر يمتد عبر عمودين وصفين باستخدام:</p>
+                <p><span class="var-example">grid-column: span 2</span></p>
+                <p><span class="var-example">grid-row: span 2</span></p>
+            </div>
+            
+            <div class="grid-item">
+                <h3>محتوى 3</h3>
+                <p>عنصر عادي في الشبكة</p>
+            </div>
+            
+            <div class="grid-item">
+                <h3>محتوى 4</h3>
+                <p>عنصر عادي في الشبكة</p>
+            </div>
+            
+            <div class="grid-item footer">
+                <h3>تذييل الصفحة (Footer)</h3>
+                <p>هذا العنصر يمتد عبر جميع الأعمدة باستخدام <span class="var-example">grid-column: 1 / -1</span></p>
+            </div>
+        </div>
+        
+        <div class="code-example">
+            
+        </div>
     </div>
-
+</body>
+</html>
 
     <script src="/JS/main.js"></script>
 </body>
